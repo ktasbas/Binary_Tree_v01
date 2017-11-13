@@ -69,15 +69,43 @@ public:
 	bool isValidBST(); // return whether this BT is a valid BST
 };
 
-
 bool isValidBT(const int *p, const int n);
-//Determine whether the array forms a valid BT.
-// the input format is the same as the above
 
+
+bool isValidBT(const int *p, const int n) //p points to array, n is number of slot used in array
+{
+	//need to calculate size of array based on slots used
+	//max n layers -> max size = 2^n - 1
+	int size = (1 << n) - 1;
+
+	//check for parents
+	for (int i = n; i > 1; i--) //lower limit 1 because top root has no parent
+	{
+		if (p[i/2] != p[0]) {
+			//each node has a parent
+		}
+		else
+		{
+			//node has no parent
+			return false;
+		}
+	}
+	
+	//check for max 2 children
+
+	/* Currently doesn't take into account number of children. Need to test further.*/
+
+}
 
 
 int main()
 {
+	int arr[10] = { -1, 1, 2, 3, 4, 5, -1, -1, -1, -1 };
+
+	cout << isValidBT(arr, 10);
+	
+	/* returns false when 5th node is empty (-1)... but it has no children so why?? */
+
 
 	return 0;
 }
