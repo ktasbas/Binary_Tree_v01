@@ -76,10 +76,13 @@ bool isValidBT(const int *p, const int n) //p points to array, n is number of sl
 {
 	//need to calculate size of array based on slots used
 	//max n layers -> max size = 2^n - 1
-	int size = (1 << n) - 1;
+	//int size = (1 << n) - 1;
+	/* technically size of array not given, only number of slots used so must determine max 
+	/  possible size array to fit given number of slots used but this will likely cause
+	/  access violation exceptions that cannot be caught real time... don't implement */
 
 	//check for parents
-	for (int i = n; i > 1; i--) //lower limit 1 because top root has no parent
+	for (int i = n-1; i > 1; i--) //n-1 because last element = size-1 //lower limit 1 because top root has no parent
 	{
 		if (p[i/2] != p[0]) {
 			//each node has a parent
@@ -92,19 +95,14 @@ bool isValidBT(const int *p, const int n) //p points to array, n is number of sl
 	}
 	
 	//check for max 2 children
-
-	/* Currently doesn't take into account number of children. Need to test further.*/
-
+	//Can't check using simple implementation, unnecessary for now
 }
 
 
 int main()
 {
-	int arr[10] = { -1, 1, 2, 3, 4, 5, -1, -1, -1, -1 };
-
+	int arr[10] = { -1, 1, 2, 3, 4, -1, -1, -1, -1, -1 };
 	cout << isValidBT(arr, 10);
-	
-	/* returns false when 5th node is empty (-1)... but it has no children so why?? */
 
 
 	return 0;
